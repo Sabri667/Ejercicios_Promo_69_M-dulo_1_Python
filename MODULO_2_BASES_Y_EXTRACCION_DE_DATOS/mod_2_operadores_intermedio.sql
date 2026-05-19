@@ -43,25 +43,16 @@ Nota: Deberás crear esta columna temporal en cada instrucción SELECT.*/
 SELECT * FROM Customers;
 SELECT * FROM Suppliers;
 
-SELECT 'Proveedor' as Relacion, City, CompanyName, ContactName
+SELECT CAST(SupplierID AS CHAR(5)) ID, City, CompanyName, ContactName, 'Proveedor' as Relacion
 FROM Suppliers
 UNION
-SELECT 'Clientes', City, CompanyName, ContactName
+SELECT CAST(CustomerID AS CHAR(5)), City, CompanyName, ContactName, 'Cliente'
 FROM Customers;
 
 /*Extraer todas las categorías de la tabla categories que contengan en la descripción "sweet" o "Sweet".*/
+SELECT * FROM Categories;
 SELECT CategoryName,Description
-FROM Categories
-WHERE Description REGEXP '[[:<:]]sweet[[:>:]]' ;
-
+WHERE Description regexp '[[:<:]]sweet[[:>:]]';
 /*Extraed todos los nombres y apellidos de los clientes y empleados que tenemos en la bases de datos:
 💡 Pista 💡 ¿Ambas tablas tienen las mismas columnas para nombre y apellido? Tendremos que combinar dos columnas usando concat para unir dos columnas. -->
 */
-SELECT * FROM Customers;
-SELECT * FROM Employees;
-
-SELECT CONCAT(LastName,' ',FirstName) 'Nombre y Apellidos'
-FROM Employees
-UNION
-SELECT ContactName
-FROM Customers;
